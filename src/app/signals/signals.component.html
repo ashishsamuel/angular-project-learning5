@@ -1,0 +1,14 @@
+<div class="container">
+    <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <button (click)="decrement()">-</button>
+        <p>{{counter()}}</p>
+        <p>Double counter value -{{doubleCounter()}}</p>
+        <button (click)="increment()">+</button>
+    </div>
+
+    @for (msg of messages(); track $index){
+    <div style="margin-top: 20px;">
+        <p>{{msg}}</p>
+    </div>
+    }
+</div>
