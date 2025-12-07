@@ -1,0 +1,30 @@
+<div class="user-container">
+  <h1>User List</h1>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Mobile No</th>
+        <th>Email ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.no }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.mobileno }}</td>
+        <td>{{ user.emailid }}</td>
+        <td>
+          <button class="delete-btn" (click)="onDeleteClick(user)" title="Delete">
+            🗑️
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-confirm-delete *ngIf="showConfirmDeleteComponent" [userToDelete]="userToDelete"
+(showConfirmUserPopup)="hideConfirmDelete($event)"></app-confirm-delete>

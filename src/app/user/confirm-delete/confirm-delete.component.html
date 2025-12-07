@@ -1,0 +1,10 @@
+<div class="modal-overlay">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete {{userToDelete.name}}<strong></strong>?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancelConfirmDelete(false)">Cancel</button>
+      <button class="btn-confirm"  (click)="cancelConfirmDelete(true)">Delete</button>
+    </div>
+  </div>
+</div>
