@@ -26,5 +26,9 @@
   </table>
 </div>
 
-<app-confirm-delete *ngIf="showConfirmDeleteComponent" [userToDelete]="userToDelete"
-(showConfirmUserPopup)="hideConfirmDelete($event)"></app-confirm-delete>
+<!-- dynamic component creation using ngif -->
+<!-- <app-confirm-delete *ngIf="showConfirmDeleteComponent" [userToDelete]="userToDelete"
+(showConfirmUserPopup)="hideConfirmDelete($event)"></app-confirm-delete> -->
+
+<!-- dynamic component creation using viewcontainer -->
+ <div appViewContainer></div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { ViewContainerDirective } from '../view-container.directive';
 
 interface User {
   no: number;
@@ -12,7 +13,7 @@ interface User {
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ConfirmDeleteComponent],
+  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -46,15 +47,46 @@ export class UserComponent {
 
   showConfirmDeleteComponent = false;
   userToDelete: User;
+  @ViewChild(ViewContainerDirective)container:ViewContainerDirective;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver
+  ) {
+
+  }
 
   onDeleteClick(user:User) {
     console.log("inside on delete click function",user);
     
-    this.showConfirmDeleteComponent = true;
+    // commenting below for displaying the component dynamically
+    // this.showConfirmDeleteComponent = true;
     this.userToDelete = user;
+    this.displayConfirmDeleteComponentDynam(this.userToDelete);
+    // const confirmDeleteFactoryComponent = this.componentFactoryResolver.resolveComponentFactory(ConfirmDeleteComponent);
+
   }
 
-  hideConfirmDelete(event: any) {
+  displayConfirmDeleteComponentDynam(user: User) {
+
+    // instantiating confirmdelete component
+    const ConfirmDeletecomponentFactory = this.componentFactoryResolver.resolveComponentFactory(ConfirmDeleteComponent);   
+
+    // rendering the component in place of location of DOM
+    const containerViewRef = this.container.viewContainer;
+    // we need to clear if any content is already rendered in that DOM element where we have applied the directive 
+    containerViewRef.clear();
+
+    // create component method to which we need to pass the component factory variable
+    const componentRef = containerViewRef.createComponent(ConfirmDeletecomponentFactory);
+    // for passing the input property ie usertodelete from user component to confirm delete component 
+    componentRef.instance.userToDelete = user;
+    // for getting the value transfered from confirmdelete component to user component 
+    componentRef.instance.showConfirmUserPopup.subscribe((value:boolean)=>{
+      this.hideConfirmDelete(value,containerViewRef);
+    });
+
+  }
+
+  hideConfirmDelete(event: any,containerViewRef:ViewContainerRef) {
     console.log("event",event);
     
     if (event) {
@@ -64,9 +96,11 @@ export class UserComponent {
         this.users.splice(deleteUserIndex, 1);
       }
       this.showConfirmDeleteComponent = false;
+      containerViewRef.clear();
     }
     else {
       this.showConfirmDeleteComponent = false;
+      containerViewRef.clear();
     }
   }
 
