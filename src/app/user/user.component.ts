@@ -80,7 +80,8 @@ export class UserComponent {
     // for passing the input property ie usertodelete from user component to confirm delete component 
     componentRef.instance.userToDelete = user;
     // for getting the value transfered from confirmdelete component to user component 
-    componentRef.instance.showConfirmUserPopup.subscribe((value:boolean)=>{
+    const hideConfirmSubs = componentRef.instance.showConfirmUserPopup.subscribe((value:boolean)=>{
+      hideConfirmSubs.unsubscribe();
       this.hideConfirmDelete(value,containerViewRef);
     });
 
