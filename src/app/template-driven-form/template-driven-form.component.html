@@ -1,0 +1,57 @@
+<form (ngSubmit)="submitUserForm(userForm)" #userForm="ngForm">
+
+	<!-- //name field -->
+	<div>
+		<label for="userName">Name</label>
+        <!-- using formcontrol name itself -->
+		<!-- <input name="userName" id="userName" type="text" placeholder="Enter the name" required ngModel>
+        <div *ngIf="!userForm.controls['userName']?.valid && userForm.controls['userName']?.touched">
+            <small style="color: red;" *ngIf="userForm.controls['userName']?.errors?.['required']">Username is Rqeuired</small>
+        </div> -->
+        <!-- creating new template varaible and assigning ngmodel to it and using the variable name -->
+        <input name="userName" id="userName" type="text" placeholder="Enter the name" required ngModel #uname="ngModel">
+		<div *ngIf="!uname?.valid && uname?.touched">
+            <small style="color: red;" *ngIf="uname?.errors?.['required']">Username is Rqeuired</small>
+        </div>
+        <!-- using ngmodel -->
+         <!-- <input name="userName" id="userName" type="text" placeholder="Enter the name" required [(ngModel)]="uName" #uname="ngModel">
+         <span *ngIf="uName">You entered {{uName}}</span> -->
+	</div>
+	
+	<!-- //Place field -->
+	<div>
+		<label for="place">Place</label>
+		<input name="place" id="place" type="text" placeholder="Enter the place" required ngModel>
+        <div *ngIf="!userForm.controls['place']?.valid && userForm.controls['place']?.touched">
+            <small style="color: red;" *ngIf="userForm.controls['place']?.errors?.['required']">Place is Rqeuired</small>
+        </div>
+	</div>
+	
+	<!-- //Gender field -->
+	<!-- <div>
+		<label for="gender">Gender</label>
+		<input name="gender" id="male" type="radio" value="male" required ngModel>
+		<label for="male">Male</label>
+		<input name="gender" id="female" type="radio" value="female" required ngModel>
+		<label for="female">Female</label>
+		<input name="gender" id="other" type="radio" value="other" required ngModel>
+		<label for="other">Other</label>
+	</div> -->
+
+    <!-- gender field values obtained from array -->
+	<div>
+        <label for="gender">Gender</label>
+        <span *ngFor="let gender of genderList">
+            <input type="radio" name="gender" [value]="gender.value" [id]="gender.id" ngModel required>
+            <label [for]="gender.id">{{gender.display}}</label>
+        </span>
+        <div *ngIf="!userForm.controls['gender']?.valid && userForm.controls['gender']?.touched">
+            <small style="color: red;" *ngIf="userForm.controls['gender']?.errors?.['gender']">Gender is Rqeuired</small>
+        </div>
+    </div>
+
+	<!-- //submit button of the form -->
+	<!-- <button type="submit" [disabled]="!userForm.valid">Submit</button> -->
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+</form>
