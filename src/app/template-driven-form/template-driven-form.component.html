@@ -40,7 +40,7 @@
 
     <!-- gender field values obtained from array -->
 	<div>
-        <label for="gender">Gender</label>
+        <label>Gender</label>
         <span *ngFor="let gender of genderList">
             <input type="radio" name="gender" [value]="gender.value" [id]="gender.id" ngModel required>
             <label [for]="gender.id">{{gender.display}}</label>
@@ -77,6 +77,23 @@
 		</div>
 		
 	 </div>
+
+	 <!-- email field -->
+	  <div>
+		<div>
+			<label for="emailId">Email Id</label>
+			<input type="text" required name="emailId" id="emailId" ngModel #emailId="ngModel">
+		</div>
+		<div *ngIf="emailId.touched && emailId.invalid">
+			<small style="color: red;" *ngIf="emailId.errors?.['required']">Emailid Is Required</small>
+		</div>
+		<div>
+			<button [disabled]="!userForm.controls['userName']?.valid && !userForm.controls['place']?.valid && !userForm.controls['gender'].valid && !userForm.controls['place']?.touched" (click)="formSetValueManually(userForm)">SEtvalue demo click</button>
+
+			<button [disabled]="!userForm.controls['userName']?.valid && !userForm.controls['place']?.valid && !userForm.controls['gender'].valid && !userForm.controls['place']?.touched" (click)="formpatchValueManually(userForm)">patchvalue demo click</button>
+		</div>
+		
+	  </div>
 
 	<!-- //submit button of the form -->
 	<!-- <button type="submit" [disabled]="!userForm.valid">Submit</button> -->

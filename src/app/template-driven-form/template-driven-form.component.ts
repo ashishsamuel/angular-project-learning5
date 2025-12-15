@@ -36,6 +36,29 @@ export class TemplateDrivenFormComponent {
     console.log("form value of username from controls property",form.controls['place'].value);
     console.log("form value of username from controls property",form.controls['gender'].value);
     
+    
+  }
+
+  formSetValueManually(form:NgForm) {
+    form.setValue({
+      address: {
+        district: "Alappuzha",
+        pincode: "689508",
+        state: "Kerala",
+        street: "Chengannur"
+      },
+      emailId: form.value.emailId,
+      place: form.value.place,
+      userName: form.value.userName,
+      gender: "Male"
+    })
+  }
+
+  formpatchValueManually(form:NgForm) {
+    form.form.patchValue({
+      userName:'Ashish'
+    })
   }
 
 }
+ 
