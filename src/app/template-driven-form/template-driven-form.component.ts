@@ -28,6 +28,8 @@ export class TemplateDrivenFormComponent {
     console.log("form value of username",form.value.userName)
     console.log("form value of place",form.value.place)
     console.log("form value of gender",form.value.gender)
+    console.log("form value of address street value",form.value.address.street);
+    
 
     // accessing form field values from controls property
     console.log("form value of username from controls property",form.controls['userName'].value);

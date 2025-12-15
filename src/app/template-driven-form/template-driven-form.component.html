@@ -50,6 +50,34 @@
         </div>
     </div>
 
+	<!-- address field -->
+	 <div ngModelGroup="address" style="display: flex;flex-direction: column;">
+		<label for="Address"></label>
+		<div style="margin: 10px;">
+			<label for="Street">Street</label>
+			<input type="text" id="street" name="street" placeholder="Enter the street" ngModel required>
+		</div>
+		<div *ngIf="userForm.controls['address']?.invalid && userForm.controls['address']?.touched">
+			<small style="color: red;" *ngIf="userForm.controls['address']?.get('street')?.errors?.['required']">Street is Required</small>
+		</div>
+		<div style="margin: 10px;">
+			<label for="District">District</label>
+			<input type="text" id="district" name="district" placeholder="Enter the district" ngModel required>
+		</div>
+		<div *ngIf="userForm.controls['address']?.invalid && userForm.controls['address']?.touched">
+			<small style="color: red;" *ngIf="userForm.controls['address']?.get('district')?.errors?.['required']">District is Required</small>
+		</div>
+		<div style="margin: 10px;">
+			<label for="State">State</label>
+			<input type="text" id="state" name="state" placeholder="Enter the state" ngModel required>
+		</div>
+		<div style="margin: 10px;">
+			<label for="Pincode">Pincode</label>
+			<input type="text" id="pincode" name="pincode" placeholder="Enter the pincode" ngModel>
+		</div>
+		
+	 </div>
+
 	<!-- //submit button of the form -->
 	<!-- <button type="submit" [disabled]="!userForm.valid">Submit</button> -->
 	<button type="submit">Submit</button>
