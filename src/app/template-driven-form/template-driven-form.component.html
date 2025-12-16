@@ -39,20 +39,22 @@
 	</div> -->
 
     <!-- gender field values obtained from array -->
-	<div>
-        <label>Gender</label>
-        <span *ngFor="let gender of genderList">
-            <input type="radio" name="gender" [value]="gender.value" [id]="gender.id" ngModel required>
-            <label [for]="gender.id">{{gender.display}}</label>
-        </span>
-        <div *ngIf="!userForm.controls['gender']?.valid && userForm.controls['gender']?.touched">
-            <small style="color: red;" *ngIf="userForm.controls['gender']?.errors?.['gender']">Gender is Rqeuired</small>
+    <fieldset class="radio-group" *ngIf="genderList?.length">
+        <legend>Gender</legend>
+        <div class="radio-options">
+            <label [for]="g.id" class="radio-option" *ngFor="let g of genderList; let i = index">
+                <input type="radio" name="gender" [value]="g.value" [id]="g.id" ngModel required>
+                {{ g.display }}
+            </label>
         </div>
-    </div>
+        <!-- <div *ngIf="!userForm.controls['gender']?.valid && userForm.controls['gender']?.touched">
+            <small class="text-error" *ngIf="userForm.controls['gender']?.errors?.['required']">Gender is Required</small>
+        </div> -->
+    </fieldset>
 
 	<!-- address field -->
 	 <div ngModelGroup="address" style="display: flex;flex-direction: column;">
-		<label for="Address"></label>
+		<label>Address</label>
 		<div style="margin: 10px;">
 			<label for="Street">Street</label>
 			<input type="text" id="street" name="street" placeholder="Enter the street" ngModel required>
@@ -88,15 +90,42 @@
 			<small style="color: red;" *ngIf="emailId.errors?.['required']">Emailid Is Required</small>
 		</div>
 		<div>
-			<button [disabled]="!userForm.controls['userName']?.valid && !userForm.controls['place']?.valid && !userForm.controls['gender'].valid && !userForm.controls['place']?.touched" (click)="formSetValueManually(userForm)">SEtvalue demo click</button>
+			<button [disabled]="!userForm.controls['userName']?.valid && !userForm.controls['place']?.valid && !userForm.controls['place']?.touched" (click)="formSetValueManually(userForm)">SEtvalue demo click</button>
 
-			<button [disabled]="!userForm.controls['userName']?.valid && !userForm.controls['place']?.valid && !userForm.controls['gender'].valid && !userForm.controls['place']?.touched" (click)="formpatchValueManually(userForm)">patchvalue demo click</button>
+			<button [disabled]="!userForm.controls['userName']?.valid && !userForm.controls['place']?.valid && !userForm.controls['place']?.touched" (click)="formpatchValueManually(userForm)">patchvalue demo click</button>
 		</div>
 		
 	  </div>
+
+
+	  <!-- aggreement checkbox enabling -->
+	   <div>
+		<label for="aggreement">click to accept Agreement</label>
+		<input type="checkbox" name="aggreement" id="aggreement" [ngModel]="isAgreed">
+	   </div>
 
 	<!-- //submit button of the form -->
 	<!-- <button type="submit" [disabled]="!userForm.valid">Submit</button> -->
 	<button type="submit">Submit</button>
 	<button type="reset">Reset</button>
 </form>
+
+<!-- user form values -->
+<section class="summary-card" aria-live="polite">
+    <div class="summary-row">
+        <div>Username</div>
+        <div class="value">{{ userNameDisplay || '—' }}</div>
+    </div>
+    <div class="summary-row">
+        <div>Place</div>
+        <div class="value">{{ placeDisplay || '—' }}</div>
+    </div>
+    <div class="summary-row">
+        <div>Gender</div>
+        <div class="value">{{ genderDisplay || '—' }}</div>
+    </div>
+    <div class="summary-row">
+        <div>Address (Street)</div>
+        <div class="value">{{ addressStreetDisplay || '—' }}</div>
+    </div>
+</section>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   templateUrl: './template-driven-form.component.html',
   styleUrl: './template-driven-form.component.scss'
 })
-export class TemplateDrivenFormComponent {
+export class TemplateDrivenFormComponent{
 
   // @ViewChild('userForm') formValues: NgForm;
   genderList = [
@@ -21,6 +21,12 @@ export class TemplateDrivenFormComponent {
   uName: string = '';
   place: string = '';
   gender: string = '';
+  userNameDisplay = '';
+  placeDisplay = '';
+  genderDisplay = '';
+  addressStreetDisplay = '';
+  isAgreed = false;
+
 
   submitUserForm(form:NgForm){
 	  console.log("form values",form)
@@ -29,6 +35,12 @@ export class TemplateDrivenFormComponent {
     console.log("form value of place",form.value.place)
     console.log("form value of gender",form.value.gender)
     console.log("form value of address street value",form.value.address.street);
+
+    // setting values to variables for displaying 
+    this.userNameDisplay = form.value.userName;
+    this.placeDisplay = form.value.place;
+    this.genderDisplay = form.value.gender;
+    this.addressStreetDisplay = form.value.address.street
     
 
     // accessing form field values from controls property
@@ -36,6 +48,12 @@ export class TemplateDrivenFormComponent {
     console.log("form value of username from controls property",form.controls['place'].value);
     console.log("form value of username from controls property",form.controls['gender'].value);
     
+    // reseting the form 
+    // form.reset();
+    form.form.patchValue({
+      userName: 'Ashwin',
+      place: 'Bangalore'
+    })
     
   }
 
