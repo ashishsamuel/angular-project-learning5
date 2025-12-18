@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-forms-demo',
@@ -25,7 +25,12 @@ export class ReactiveFormsDemoComponent implements OnInit{
         street: new FormControl(null,Validators.required),
         district: new FormControl(null,Validators.required),
         state: new FormControl(null,Validators.required)
-      })
+      }),
+      skills: new FormArray([
+        new FormControl(null),
+        new FormControl(null),
+        new FormControl(null)
+      ])
       // street: new FormControl(null),
     })
   }

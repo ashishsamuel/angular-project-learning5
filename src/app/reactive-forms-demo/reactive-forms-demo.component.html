@@ -46,5 +46,11 @@
     </div>
   </fieldset>
 
+  <div style="margin: 10px 0px" >
+    <label for="skills">Skills</label>
+    <input type="text" placeholder="enter skill....." *ngFor="let control of reactiveForm.get('skills')['controls'];let i=index"
+    [formControl]="control">
+  </div>
+
   <button type="submit" [disabled]="reactiveForm.invalid">Submit</button>
 </form> 
