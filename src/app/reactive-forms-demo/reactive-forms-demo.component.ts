@@ -26,17 +26,33 @@ export class ReactiveFormsDemoComponent implements OnInit{
         district: new FormControl(null,Validators.required),
         state: new FormControl(null,Validators.required)
       }),
+      // for static from control adding case
+      // skills: new FormArray([
+      //   new FormControl(null),
+      //   new FormControl(null),
+      //   new FormControl(null)
+      // ])
       skills: new FormArray([
         new FormControl(null),
-        new FormControl(null),
-        new FormControl(null)
-      ])
+       ])
       // street: new FormControl(null),
     })
   }
 
   submitReactiveForm() {
     console.log("reactiveform",this.reactiveForm);    
+  }
+
+  addSkill(){
+    (<FormArray>this.reactiveForm.get('skills')).push(
+      new FormControl(null,Validators.required)
+    );
+  }
+
+  deleteSkill(index:number) {
+    // (<FormArray>this.reactiveForm.get('skills')).
+    const skillsControl = <FormArray>this.reactiveForm.get('skills');
+    skillsControl.removeAt(index);
   }
 
 }

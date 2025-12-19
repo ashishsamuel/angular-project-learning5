@@ -46,11 +46,15 @@
     </div>
   </fieldset>
 
-  <div style="margin: 10px 0px" >
+  <div style="margin: 10px 0px" formArrayName="skills">
     <label for="skills">Skills</label>
-    <input type="text" placeholder="enter skill....." *ngFor="let control of reactiveForm.get('skills')['controls'];let i=index"
-    [formControl]="control">
+    <div *ngFor="let control of reactiveForm.get('skills')['controls'];let i=index">
+        <input type="text" placeholder="enter skill....." 
+        [formControl]="control">
+        <button type="submit" (click)="deleteSkill(i)">Delete</button>
+    </div>
   </div>
 
-  <button type="submit" [disabled]="reactiveForm.invalid">Submit</button>
-</form> 
+  <button type="button" (click)="addSkill()">Add Skill +</button>
+  <button type="submit">Submit</button>
+</form>  
