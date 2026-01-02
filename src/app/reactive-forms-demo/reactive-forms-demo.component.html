@@ -56,5 +56,24 @@
   </div>
 
   <button type="button" (click)="addSkill()">Add Skill +</button>
+
+  <div formArrayName="experience">
+    <div *ngFor="let control of reactiveForm.get('experience')['controls']; let i = index" [formGroupName]="i">
+    <label for="experience">Experience {{i+1}}</label>
+      <input type="text" formControlName="company" placeholder="Company">
+      <select formControlName="position">
+        <option value="">Select Position</option>
+        <option value="software engineer">Software Engineer</option>
+        <option value="tech architect">Tech Architect</option>
+        <option value="senior developer">Senior Developer</option>
+        <option value="project manager">Project Manager</option>
+      </select>
+      <input type="text" formControlName="totalExp" placeholder="Total Experience">
+      <input type="date" formControlName="startDate">
+      <input type="date" formControlName="endDate">
+      <button type="button" (click)="deleteExperience(i)">Delete</button>
+    </div>
+  </div>
+  <button type="button" (click)="addExperience()">Add Experience +</button>
   <button type="submit">Submit</button>
 </form>  
