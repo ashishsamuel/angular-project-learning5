@@ -2,15 +2,18 @@
   <div>
     <label for="username">Username:</label>
     <input type="text" id="username" formControlName="username">
-    <small *ngIf="reactiveForm.controls['username'].invalid && reactiveForm.controls['username'].touched">UserName is required</small>
+    <div *ngIf="reactiveForm.controls['username'].invalid && reactiveForm.controls['username'].touched">
+      <small *ngIf="reactiveForm.controls['username'].errors?.['noSpaceAllowed']">No Spaces are allowed in usernames</small>
+      <small *ngIf="reactiveForm.controls['username'].errors?.['required']">Username is Required</small>
+    </div>
   </div>
-
   <div>
     <label for="email">Email:</label>
     <input type="email" id="email" formControlName="email">
-    <div *ngIf="reactiveForm.controls['email'].invalid && reactiveForm.controls['email'].touched">
-        <small *ngIf="reactiveForm.controls['email'].errors['required']">Email is required</small>
-        <small *ngIf="reactiveForm.controls['email'].errors['email']">Email format is not correct</small>
+    <div *ngIf="reactiveForm.controls['email'].invalid && reactiveForm.controls['email'].touched" style="display: flex;flex-direction: column;">
+        <small *ngIf="reactiveForm.controls['email'].errors?.['required']">Email is required</small>
+        <small *ngIf="reactiveForm.controls['email'].errors?.['email']">Email format is not correct</small>
+        <small *ngIf="reactiveForm.controls['email'].errors?.['noSpaceAllowed']">No Spaces are allowed in emails</small>
     </div>
   </div>
 
