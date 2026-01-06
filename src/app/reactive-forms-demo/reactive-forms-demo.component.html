@@ -1,4 +1,4 @@
-<form [formGroup]="reactiveForm" (ngSubmit)="submitReactiveForm()">
+<form [formGroup]="reactiveForm" (ngSubmit)="submitReactiveForm()" class="container" [ngClass]="formStatus">
   <div>
     <label for="username">Username:</label>
     <input type="text" id="username" formControlName="username">

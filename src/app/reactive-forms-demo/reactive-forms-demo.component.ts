@@ -13,6 +13,7 @@ import { CustomValidators } from '../Validators/noSpaceAllowed.validator';
 export class ReactiveFormsDemoComponent implements OnInit{
 
   reactiveForm: FormGroup;
+  formStatus: string = '';
 
   ngOnInit() {
 
@@ -46,6 +47,27 @@ export class ReactiveFormsDemoComponent implements OnInit{
     })
        ])
       // street: new FormControl(null),
+    })
+
+    // username formcontrol valuechanges function
+    // this.reactiveForm.get('username').valueChanges.subscribe((value)=>{
+    //   console.log("username formcontrol value from valuechanges function",value);      
+    // })
+
+    // reactiveform fromgroup valuechanges fucntion
+    // this.reactiveForm.valueChanges.subscribe((value)=>{
+    //   console.log("value of the reactive formgroup from valuechanges function",value)
+    // })
+
+    //username formcontrol statuschanges function
+    this.reactiveForm.get('username').statusChanges.subscribe((value)=>{
+      console.log("status of the username formcontrol from statuschanges function",value)
+    })
+
+    //reactive form group statuschanges function
+    this.reactiveForm.statusChanges.subscribe((value)=>{
+      this.formStatus = value;
+      console.log("status of the reactive formgroup from statuschanges function",value)
     })
   }
 

@@ -104,3 +104,15 @@ small {
 input.ng-pending{
 	border: 2px solid yellow;
 }
+
+.container.VALID{
+	border: 2px solid green;
+}
+
+.container.PENDING{
+	border: 2px solid yellow;
+}
+
+.container.INVALID{
+	border: 2px solid red;
+}
