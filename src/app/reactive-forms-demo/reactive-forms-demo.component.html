@@ -5,6 +5,7 @@
     <div *ngIf="reactiveForm.controls['username'].invalid && reactiveForm.controls['username'].touched">
       <small *ngIf="reactiveForm.controls['username'].errors?.['noSpaceAllowed']">No Spaces are allowed in usernames</small>
       <small *ngIf="reactiveForm.controls['username'].errors?.['required']">Username is Required</small>
+      <small *ngIf="reactiveForm.controls['username'].errors?.['usernameCheck']">Username Already Exists</small>
     </div>
   </div>
   <div>

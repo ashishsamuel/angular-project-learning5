@@ -18,7 +18,7 @@ export class ReactiveFormsDemoComponent implements OnInit{
 
     // reactive form fields initialization
     this.reactiveForm = new FormGroup({
-      username: new FormControl(null,[Validators.required,CustomValidators.noSpaceAllowed]),
+      username: new FormControl(null,[Validators.required,CustomValidators.noSpaceAllowed],CustomValidators.checkUsername),
       email: new FormControl(null,[Validators.required,Validators.email,CustomValidators.noSpaceAllowed]),
       gender: new FormControl(null),
       place: new FormControl(null,Validators.required),
