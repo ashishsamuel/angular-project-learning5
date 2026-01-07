@@ -78,6 +78,10 @@
       <button type="button" (click)="deleteExperience(i)">Delete</button>
     </div>
   </div>
-  <button type="button" (click)="addExperience()">Add Experience +</button>
-  <button type="submit">Submit</button>
+  <div style="display: flex;flex-direction: column;">
+    <button type="button" style="width: 150px;" (click)="addExperience()">Add Experience +</button>
+    <button type="submit" style="width: 150px;">Submit</button>
+    <button type="button" (click)="resetEmployeeForm()" style="width: 150px;">Reset</button>
+  </div>
+  
 </form>  

@@ -73,6 +73,37 @@ export class ReactiveFormsDemoComponent implements OnInit{
 
   submitReactiveForm() {
     console.log("reactiveform",this.reactiveForm);    
+
+    // updating a formgroup value fully using setvalue method
+    // this.reactiveForm.setValue({
+    //   username: "ashish",
+    //   email: "ast@godigit.com",
+    //   gender: "male",
+    //   place: "",
+    //   address: ({
+    //     street: "",
+    //     district: "",
+    //     state: ""
+    //   }),
+    //   skills: [""],
+    //   experience: [{company: "", position: "", totalExp: "", startDate: "", endDate: ""}]
+    // })
+
+    //updating a formcontrol only using setvalue method
+    // this.reactiveForm.setValue({
+    //   username: "amal"
+    // });
+
+    // updating a formcontrol using patchvalue method 
+    this.reactiveForm.patchValue({
+      username:"amal"
+    })
+
+    // updating many formcontrols using patchvalue method
+    this.reactiveForm.patchValue({
+      username: "amal",
+      email: "amal@godigit.com"
+    })
   }
 
   addSkill(){
@@ -100,6 +131,33 @@ export class ReactiveFormsDemoComponent implements OnInit{
   deleteExperience(index:number) {
     const experienceControl = <FormArray>this.reactiveForm.get('experience');
     experienceControl.removeAt(index);
+  }
+
+  resetEmployeeForm() {
+    // reseting the entire form 
+    // this.reactiveForm.reset();
+
+    // reset the entire form and setting some default value 
+    this.reactiveForm.reset({
+      username: "",
+      email: "ashwin@godigit.com",
+      gender: "male",
+      place: "",
+      address: {
+        street: "",
+        district: "",
+        state: ""
+      },
+      skills: [],
+       experience: {
+          company: "",
+          position: "",
+          totalExp: "",
+          startDate: "",
+          endDate: ""
+      }
+    })
+
   }
 
 
