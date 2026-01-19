@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-firebase-http-demo',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule, HttpClientModule],
   templateUrl: './firebase-http-demo.component.html',
   styleUrl: './firebase-http-demo.component.scss'
 })
 export class FirebaseHttpDemoComponent {
 
+  http:HttpClient = inject(HttpClient)
+
+  submitUserData(userData: NgForm) {
+    console.log("userdata",userData);
+    this.http.post('https://httpclient-project-bd70e-default-rtdb.firebaseio.com',userData)
+  }
 }

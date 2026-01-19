@@ -1,1 +1,22 @@
-<p>firebase-http-demo works!</p>
+<form class="container" style="display: flex; flex-direction: column;justify-content: center;align-items: center;" (ngSubmit)="submitUserData(userForm)" #userForm="ngForm">
+    <div style="display: flex;flex-direction: column;">
+        <label for="fname">First Name</label>
+        <input type="text" style="width: 300px; height: 30px;" name="fname" ngModel>      
+    </div>
+    <div style="display: flex;flex-direction: column;">
+        <label for="lname">Last Name</label>
+        <input type="text" style="width: 300px; height: 30px;" name="lname" ngModel>      
+    </div>
+    <div style="display: flex;flex-direction: column;">
+        <label for="place">Place</label>
+        <input type="text" style="width: 300px; height: 30px;" name="place" ngModel>      
+    </div>
+    <div>
+        <label for="gender">Gender</label>
+        <input type="radio" name="gender" value="male" ngModel>
+        <label for="gender">Male</label>
+        <input type="radio" name="gender" value="female" ngModel>   
+        <label for="gender">Female</label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
