@@ -15,7 +15,9 @@ export class FirebaseHttpDemoComponent {
   http:HttpClient = inject(HttpClient)
 
   submitUserData(userData: NgForm) {
-    console.log("userdata",userData);
-    this.http.post('https://httpclient-project-bd70e-default-rtdb.firebaseio.com',userData)
+    console.log("userdata",userData.value);
+    this.http.post('https://httpclient-project-bd70e-default-rtdb.firebaseio.com/users.json',userData.value).subscribe((res)=>{
+      // console.log("response for the new user call",res);
+    })
   }
 }
