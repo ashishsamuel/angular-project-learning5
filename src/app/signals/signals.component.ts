@@ -1,13 +1,16 @@
 import { Component, computed, DoCheck, effect, signal } from '@angular/core';
+import { SignalsDemoComponent } from '../signals-demo/signals-demo.component';
 
 @Component({
   selector: 'app-signals',
   standalone: true,
-  imports: [],
+  imports: [SignalsDemoComponent],
   templateUrl: './signals.component.html',
   styleUrl: './signals.component.scss'
 })
 export class SignalsComponent implements DoCheck{
+
+  inputValue:string = "string to Signal conversion";
 
   // change detection case
   // counter:number = 0;
@@ -68,6 +71,11 @@ export class SignalsComponent implements DoCheck{
   decrement() {
     this.counter.update((prevValue)=> prevValue-1);
     this.messages.update((prevValue)=> prevValue.slice(0, -1));
+  }
+
+  fetchNameType(event:any) {
+    console.log("event",event);
+    
   }
 
 

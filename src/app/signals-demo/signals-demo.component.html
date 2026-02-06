@@ -1,0 +1,46 @@
+<div style="display: flex; margin: 10px; flex-direction: column;">
+  <p>Coursename string signal value -> {{courseName()}}</p>
+  <p>StateList array signal value -> {{stateList()}}</p>
+  <p>DistrictList array signal value -> {{districtList()}}</p>
+  <p>String value from parent to signal {{signalValueFromParent()}}</p>
+
+  <!-- directly if we want to use object and print it then we have to convert it into json else it will show like [object Object] -->
+  <!-- <p>User Object -> {{userObj()}}</p> -->
+
+  <!-- we can use json pipe directly on the property like below to print the object -->
+  <p>User Object signal -> {{userObj() | json}}</p>
+
+  <input type="text" [(ngModel)]="district" style="width: 300px;" #districtName>
+  <button (click)="addNewDistrict()" style="width: 300px;">Add new District</button>
+
+  <button style="margin-top: 10px; width: 250px;" (click)="changeCourseName()">Change Course Name</button>
+  <button style="margin-top: 10px; width: 250px;" (click)="changeStateList()">Change State List</button>
+  <button style="margin-top: 10px; width: 250px;" (click)="changeUserObject()">Add new parameter in User Object</button>
+  <button style="margin-top: 10px; width: 250px;" (click)="changeExistingParameter()">Change Existing parameter in Userobj</button>
+
+  <div style="display: flex;flex-direction: column;">
+  <div style="display: flex;">
+    <label>First Name</label>
+    <input type="text" (input)="updateName('fname',$event)">
+  </div>
+
+  <div style="display: flex;">
+    <label>Middle Name</label>
+    <input type="text" (input)="updateName('mname',$event)">
+  </div>
+
+  <div style="display: flex;">
+    <label>Last Name</label>
+    <input type="text" (input)="updateName('lname',$event)">
+  </div>
+
+  <div style="display: flex;">
+    <label>Full Name</label>
+    <input type="text" [value]="fullName()">
+  </div>
+
+  </div>
+
+
+
+</div>

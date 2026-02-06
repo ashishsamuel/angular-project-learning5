@@ -12,3 +12,7 @@
     </div>
     }
 </div>
+
+<div style="margin-top: 10px;">
+    <app-signals-demo [signalValueFromParent]="'Random Title'" (signalValueCourseToParent)="fetchNameType($event)"></app-signals-demo>
+</div>
