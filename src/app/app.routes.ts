@@ -22,6 +22,5 @@ export const routes: Routes = [
   { path: 'rxjs-demo', component: RxjsOperatorDemoComponent},
   { path: 'signals-demo', component: SignalsDemoComponent},
   { path: 'signals-first', component: SignalsComponent},
-
-
+  { path: 'rxjs-operator-demo', component: RxjsOperatorDemoComponent}
 ];

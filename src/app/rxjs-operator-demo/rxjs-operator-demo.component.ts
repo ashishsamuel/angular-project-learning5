@@ -1,18 +1,83 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { filter, from, fromEvent, map, Observable, of } from 'rxjs';
+import { ApiServiceService } from '../api-service.service';
 
 @Component({
   selector: 'app-rxjs-operator-demo',
   standalone: true,
   imports: [CommonModule],
+  providers: [ApiServiceService],
   templateUrl: './rxjs-operator-demo.component.html',
   styleUrl: './rxjs-operator-demo.component.scss'
 })
 export class RxjsOperatorDemoComponent implements OnInit{
 
+  @ViewChild('btn') btn!: ElementRef;
+  // number array list
+  numberArray!: number[];
+
+  apiService = inject(ApiServiceService);
+
+  constructor() {
+    this.apiService.getUserDetails().subscribe(res=>{
+      console.log("response",res);
+    })
+
+    this.apiService.getSingleUserDetails().subscribe(res=>{
+      console.log("response", res);
+    })
+  }
+
   ngOnInit() {
-    
+    // of opertor demo code
+    const ofOperatorResult$ = of(1,2,true,"Of operator demo");
+    ofOperatorResult$.subscribe({
+      next: (data:any)=>{
+        console.log("datas emitted from of operator",data);
+      },
+      error: (err:any)=>{
+        console.log("errror inside of operator",err);
+      },
+      complete:()=>{
+        console.log("observables value emission is completed");
+      }
+    })  
+
+    // from operator demo code
+    const fromOperatorResult$ = from([12,"ashish",true]);
+    fromOperatorResult$.subscribe({
+      next: (data:any)=>{
+        console.log("data inside next from operator", data);
+
+      }
+    })
+
+    // pipe operator with filter operator where observable created using from operator
+    const noList$ = from([10,11,12,13,14,15,16]);
+    noList$.pipe(filter((num:number)=>num%2===0)).subscribe((res)=>{
+      console.log("numbers divisible by 2 are",res);
+    })
+    // where from operator emits the each datas in the array one by one at a time
+
+    // pipe operator with map operator where observable created using of operator
+    const noListOf$ = of([10,11,12,13,14,15,16]);
+    const filteredData$ = noListOf$.pipe(map((num)=>num.filter(num1=>num1 % 2 == 0)));
+    filteredData$.subscribe((res)=>{
+      console.log("numbers divisible by 2 are",res);
+    })
+
+    // where of operator emits all the the datas in the array at a single time
+
+  }
+
+  // fromevent operator demo code
+  createObservableFromFromEvent() {
+    const fromEventResult$ = fromEvent(this.btn.nativeElement,'click');
+    fromEventResult$.subscribe((data)=>{
+      console.log("data related to the event", data);
+    })
   }
   // map operator 
   //  the below will written an array with the list of names and the first map that we use is the rxjs operator and second map that we use 
