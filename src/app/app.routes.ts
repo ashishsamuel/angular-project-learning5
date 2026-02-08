@@ -9,6 +9,7 @@ import { ObservablePromiseDemoComponent } from './observable-promise-demo/observ
 import { RxjsOperatorDemoComponent } from './rxjs-operator-demo/rxjs-operator-demo.component';
 import { SignalsDemoComponent } from './signals-demo/signals-demo.component';
 import { SignalsComponent } from './signals/signals.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,5 +23,7 @@ export const routes: Routes = [
   { path: 'rxjs-demo', component: RxjsOperatorDemoComponent},
   { path: 'signals-demo', component: SignalsDemoComponent},
   { path: 'signals-first', component: SignalsComponent},
-  { path: 'rxjs-operator-demo', component: RxjsOperatorDemoComponent}
+  { path: 'rxjs-operator-demo', component: RxjsOperatorDemoComponent},
+  { path: 'subjects', component: SubjectsComponent},
+
 ];

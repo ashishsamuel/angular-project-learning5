@@ -1,0 +1,15 @@
+<div style="display: flex;">
+    <button (click)="getObservableData()">Get Observable data</button>
+    <button (click)="getSubjectData()">Get Subject data</button>
+</div>
+
+<div style="display: flex;margin-top: 10px;">
+    <button (click)="emitData()">emit Data</button>
+    <button (click)="getData()">get data</button>
+</div>
+
+<div style="margin-top: 15px;">
+    <div *ngFor="let data of myData">
+        {{data}}
+    </div>
+</div>

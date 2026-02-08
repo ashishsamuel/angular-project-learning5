@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { filter, from, fromEvent, map, Observable, of } from 'rxjs';
+import { debounceTime, filter, from, fromEvent, interval, map, Observable, of, take } from 'rxjs';
 import { ApiServiceService } from '../api-service.service';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-rxjs-operator-demo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   providers: [ApiServiceService],
   templateUrl: './rxjs-operator-demo.component.html',
   styleUrl: './rxjs-operator-demo.component.scss'
@@ -19,8 +20,15 @@ export class RxjsOperatorDemoComponent implements OnInit{
   numberArray!: number[];
 
   apiService = inject(ApiServiceService);
+  allUsersListData!: any;
+  searchValue = new FormControl();
 
   constructor() {
+
+    this.searchValue.valueChanges.pipe(debounceTime(1000)).subscribe((data)=>{
+      console.log("data inside searchvalue",data);   
+    })
+
     this.apiService.getUserDetails().subscribe(res=>{
       console.log("response",res);
     })
@@ -28,6 +36,21 @@ export class RxjsOperatorDemoComponent implements OnInit{
     this.apiService.getSingleUserDetails().subscribe(res=>{
       console.log("response", res);
     })
+    this.allUsersListData = this.apiService.allUsersDataList;
+    console.log("alluserslist data", this.allUsersListData);
+
+    // use of filter operator for filtering even numbers
+    const timeValue = interval(1000);
+    // timeValue.pipe(filter(num=> num%2==0)).subscribe((data)=>{
+    //   console.log("data",data);
+    // })
+
+    // use of take operator until how many values we want to emit the data
+    // timeValue.pipe(filter(num=> num%2==0),take(7)).subscribe((data)=>{
+    //   console.log("first 7 even numbers", data);
+    // })
+
+     
   }
 
   ngOnInit() {

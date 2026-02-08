@@ -1,26 +1,41 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { map, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiServiceService {
-
   http = inject(HttpClient);
 
-  constructor() { }
+  allUsersDataList:WritableSignal<any> = signal(null);
+
+  constructor() {}
 
   getUserDetails() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(map((userList:any)=>userList.map(user => {
-      return {
-        userId: user.id,
-        userName: user.name
-      }
-    })))
+    return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
+      tap(userList=>{
+        console.log("full userList inside tap operator", userList);
+        this.allUsersDataList.set(userList);
+      }),
+      map((userList: any) =>
+        userList.map((user) => {
+          return {
+            userId: user.id,
+            userName: user.name,
+          };
+        }),
+      ),
+    );
   }
 
   getSingleUserDetails() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users/3').pipe(map((userData:any)=>userData.address)
-  )}
+    return this.http
+      .get('https://jsonplaceholder.typicode.com/users/3')
+      .pipe(
+        tap(singleUser=>{
+          console.log("Full details of a single user",singleUser);       
+        }),
+        map((userData: any) => userData.address));
+  }
 }
