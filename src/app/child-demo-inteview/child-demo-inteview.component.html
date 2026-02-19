@@ -1,0 +1,29 @@
+
+ <!-- parent child communication starts here -->
+<p>child-demo-inteview works!</p>
+<p>{{textValueFromParent}}</p>
+ <ng-content select=".p-msg"></ng-content>
+
+
+<input type="text" [(ngModel)]="textValue" (input)="emitValueToParent()">
+ <!-- parent child communication ends here -->
+
+<!-- template refernce variable demo starts here -->
+ <h3> template reference variable example</h3>
+    <!-- <input type="text" #nameValue (change)="fetchName(nameValue.value)"> -->
+
+    <!-- without triggering any events we want to fetch the value of the teamplet reference variable then we us @viewchild() decorator that is used to access an html element in the DOM -->
+
+
+    <input type="date" #dateValue (change)="calculateAge()">
+
+    <input #age type="text" >
+
+    <p>age calculated -> {{calculatedAge}}</p>
+
+ <!-- template refernce variable demo ends here -->
+
+ <!-- ng-content use starts here -->
+ <ng-content select=".h3-msg"></ng-content>
+ <!-- ng-content use ends here -->
+

@@ -1,0 +1,163 @@
+<div class="form mb-3">
+    
+</div>
+
+
+<!-- // binding demo starts here -->
+<!-- binding demo example -->
+ <!-- string interpolation -->
+  <div class="m-3 bg-info">
+    {{name}}
+  </div>
+
+  <!-- property binding -->
+   <!-- used for binding Dom properties -->
+    <!-- we are binding fom properties not html attributes -->
+    <div class="m-3">
+     <button [disabled]="btnDisable" class="btn btn-primary">Submit</button>
+    </div>
+
+    <!-- event binding -->
+     <!-- used for binding events caused by user like click,blur,hover etc -->
+      <div class="m-3">
+        <button (click)="buttonClicked($event)" class="btn btn-warning">Click Button</button>
+      </div>
+
+      <!-- two way data binding -->
+       <div class="m-3">
+         <input type="text" [(ngModel)]="textValue">
+         <p>{{textValue}}</p>
+       </div>
+
+       <!--  binding demo ends here -->
+
+       <!--  directive demo starts here -->
+       <!-- strucutral directives -->
+
+       <!-- ngif structural directive -->
+        <div *ngIf="displayUserFlag; else userNotFound">
+            <h3>User has been displayed</h3>
+        </div>
+
+        <ng-template #userNotFound>
+            <h3>no users found</h3>
+        </ng-template>
+
+        <!-- <div *ngIf="displayUserFlag; else userNotFound">
+            <h3>User has been displayed</h3>
+        </div>  this corresponds to 
+        <ng-template [ngIf]="displayUserFlag">
+            <div>
+                <h3>User has been dispalyed</h3>
+            </div>
+        </ng-template>
+        -->
+
+        <!-- ng-template is a structural directive container which does not render the content 
+         unless it is explicityl told by angular for rendering  
+         here ng-template is used in case of conditional rendering 
+         -->
+
+        <!-- if we can to make the ng-template to automatically render then we can use ngtemplateoutlet for <ng-template> tag -->
+            <div *ngTemplateOutlet="automaticRender">
+
+            </div>
+
+            <ng-template #automaticRender>
+                <div>hello this is automatic rendering of ng-template tag</div>
+            </ng-template>
+
+
+         <!-- we are also able to pass context values to the ng-template -->
+          <div *ngTemplateOutlet="automaticRenderContext; context: {userName : 'Ashish Samuel'}">
+                
+            </div>
+
+            <ng-template #automaticRenderContext let-name="userName">
+                <div>hello this is automatic rendering of ng-template tag</div>
+                <div>context value username shared is {{name}}</div>
+            </ng-template>
+            <!-- ngif structural directive ends here-->
+
+
+            <!-- ngfor structural directive -->
+             <!-- used for iterating through a list of items or an array -->
+
+             <div *ngFor="let user of users;let i=index">
+                <div style="display: flex;">
+                    <h5>{{user}}</h5>
+                    <h5>index value {{i}}</h5>
+                </div>
+                
+              </div>
+
+              <!-- efficient way od using ngfor is by using trackBy like below -->
+              <!-- trackby used for preventing dom recreations -->
+              <div *ngFor="let user of users;let i= index;trackBy: trackbyIndex">
+                <div style="display: flex;">
+                    <h5>{{user}}</h5>
+                    <h5>index value {{i}}</h5>
+                </div>
+              </div>
+              <!-- ngfor structural directive ends here-->
+
+              <!-- ngswitch structural directive -->
+               <!-- used when we wan to conditionally render anything like a dom element etc  basically used for role based rendering-->
+                <div class="m-5">
+                    <div [ngSwitch]="userType">
+                        <p *ngSwitchCase="'Admin'">Admin</p>
+                        <p *ngSwitchCase="'Broker'">Broker</p>
+                        <p *ngSwitchCase="'HR'">HR</p>
+                        <p *ngSwitchCase="'Employee'">Employee</p>
+                        <p *ngSwitchDefault>Other</p>                        
+                    </div>
+                </div>
+
+                <!-- for using multiple strcutural directives in a single html element then we need to use ng-container that acts as logical container for grouping multiple structural directives -->
+
+                <!-- ngswtich structural directive ends here-->
+
+                <!-- structural directive ends here -->
+
+                <!-- attribute directive starts here -->
+                 <div class="mt-3">
+                    <!-- <p [ngClass]="{'ng-class-style': !isBackgroundColorChange, 'ms-4 bg-primary': isBackgroundColorChange}">This is an example of ngclass attribute directive</p> -->
+                    <p [ngClass]="!isBackgroundColorChange ? 'ms-4 bg-primary' : 'ng-class-style'">This is an example of ngclass attribute directive ternary</p>
+                    <p [ngClass]="'bg-secondary'">Hello this is ngclass in string format</p>
+                    <p [ngClass]="['p-4','bg-warning']">Hello this is ngclass in array format</p>
+
+
+                    <!-- ngstyle -->
+                     <p [ngStyle]="{'color':'red','padding':'5px'}">Ngstyle attribute directive</p>
+                     <p [ngStyle]="{'color':!isStyleEnable?'red':'yellow','padding':'5px'}">Ngstyle attribute directive</p>
+
+                 </div>
+
+                 <!-- attribute directive ends here -->
+
+                 <!-- child selector (parent child communication) starts here-->
+                  <app-child-demo-inteview [textValueFromParent]="textValueToChild"
+                  (textValueFromChild)="fetchValueFromChild($event)"></app-child-demo-inteview>
+
+                  <p>data that comes from child component {{textValueFromChild}}</p>
+
+                 <!-- child selector (parent child communication) ends here-->
+
+                 <!-- accessing child comp properties and methods -->
+                  <button (click)="accessChildCompValue()">Click</button>
+                  <!--  -->
+<!-- accessing child comp properties and methods ens here-- -->
+                 
+<!-- ng-content topic starts here -->
+<app-child-demo-inteview>
+    <h3 class="h3-msg" #messages>Hello, How are you now ?</h3>
+    <p class="p-msg" #messages>this is the second message needs to pass</p>
+</app-child-demo-inteview>
+
+
+<!-- ng-content topic ends here -->
+
+<!-- custom attribute directive starts here-->
+<p appAppHighlight>this is an example of custom structual directive in which we change the background color to red</p>
+<!-- custom attribute directive ends here-->
+

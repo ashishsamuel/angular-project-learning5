@@ -10,6 +10,7 @@ import { RxjsOperatorDemoComponent } from './rxjs-operator-demo/rxjs-operator-de
 import { SignalsDemoComponent } from './signals-demo/signals-demo.component';
 import { SignalsComponent } from './signals/signals.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { FormsInterviewComponent } from './forms-interview/forms-interview.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,5 +26,5 @@ export const routes: Routes = [
   { path: 'signals-first', component: SignalsComponent},
   { path: 'rxjs-operator-demo', component: RxjsOperatorDemoComponent},
   { path: 'subjects', component: SubjectsComponent},
-
+  { path: 'angular-forms-interview', component: FormsInterviewComponent}
 ];
