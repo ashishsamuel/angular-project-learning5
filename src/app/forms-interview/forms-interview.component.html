@@ -158,6 +158,51 @@
 <!-- ng-content topic ends here -->
 
 <!-- custom attribute directive starts here-->
-<p appAppHighlight>this is an example of custom structual directive in which we change the background color to red</p>
+<p appAppHighlight>this is an example of custom structual directive in which we change the background color to yellow</p>
 <!-- custom attribute directive ends here-->
 
+<!-- usage of elementref is not safe so we can use renderer2 in place of elementref inside
+ highlight directive -->
+ <p appAppHighlight>this is an custom attribute directive that changes background color of the text to yellow by using renderer2</p>
+<!-- custom attribute directive with renderer2 ends here -->
+
+
+<!-- service implementation starts here -->
+ <h5>full name coming from service file {{fullName}}</h5>
+<!-- service implementation ends here -->
+
+<!-- observable code changes starts here -->
+<div>
+    <!-- async pipe will only emit the last value ie 123456 in this case  -->
+    {{observableofList | async}}
+    <h3>Observable list using from operator {{observablefromList| async}}</h3>
+</div>
+
+<div>
+    <h3>from event operator</h3>
+    <button #fromEventBtn (click)="fromEvent()">From event</button>
+</div>
+<!-- observable code changes ends here -->
+
+<!-- promises and observables comparison starts here -->
+
+
+<!-- promises and observables comparison ends here -->
+
+<div class="mt-3">
+    <h4>All Products Details name and price</h4>
+    <div *ngFor="let product of allProductsList" class="d-flex">
+        <p>{{product.productName}}</p>
+        <p>{{product.productPrice}}</p>
+    </div>
+
+    <h4>All Products Details whose price greater than 100 name and price</h4>
+    <button (click)="productPriceGreater100()">products with price > 100</button>
+    <ng-container *ngIf="productsPriceGreater">
+        <div *ngFor="let product of productsPriceGreater" class="d-flex">
+        <p>{{product.productName}}</p>
+        <p>{{product.productPrice}}</p>
+    </div>
+    </ng-container>
+    
+</div>

@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChildDemoInteviewComponent } from "../child-demo-inteview/child-demo-inteview.component";
-import { AppHighlightDirective } from '../app-highlight.directive';
+import { AppHighlightDirective } from '../directives/app-highlight.directive';
+import { InterviewPracticeService } from '../services/interview-practice.service';
+import { from, fromEvent, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-forms-interview',
@@ -11,7 +13,77 @@ import { AppHighlightDirective } from '../app-highlight.directive';
   templateUrl: './forms-interview.component.html',
   styleUrl: './forms-interview.component.scss'
 })
-export class FormsInterviewComponent {
+export class FormsInterviewComponent implements OnInit, AfterViewInit{
+
+  fullName: string = '';
+  allProductsList: any[] =[];
+
+  // constrcutor used for dependecy injection
+  constructor(private service: InterviewPracticeService,
+    private element: ElementRef
+  ) {
+
+  }
+
+  ngOnInit() {
+    // value that is obtained from service file by depenedency injection
+    console.log("full name variable inside service file", this.service.fullName);
+    this.fullName = this.service.fullName;
+    this.service.getUsersList();
+
+    // observable created from of operator
+    this.observableofList.subscribe((data)=>{
+      console.log("data emitted",data);
+    })
+
+    // observable created from from operator
+    this.observablefromList.subscribe(data=>{
+      console.log("names list coming from the observable", data);      
+    })
+
+    // observable that has been created from observable class
+    this.observableListClass.subscribe((data)=>{
+      console.log("observable created from observable class", data);
+    })
+
+    // promise
+    this.promise.then((res)=>{
+      console.log("response from promise",res);
+    })
+
+    // observable
+    this.observable.subscribe((res)=>{
+      console.log("response coming from observable",res);
+    })
+
+    // api call for getting all products list 
+    this.service.getAllProductsList().subscribe({
+      next:(productsList)=>{
+        // console.log("full productsList after data transformation", productsList);
+        this.allProductsList = productsList;
+      },
+      error:(err)=>{
+        console.log("error while fetching all products",err);
+      }
+    }) 
+  }
+
+  productsPriceGreater: any[] = [];
+
+  productPriceGreater100() {
+    this.service.getProductsPrice100().subscribe({
+      next:(productsList)=>{
+        this.productsPriceGreater = productsList;
+        console.log("productsp price greater",this.productsPriceGreater);
+        
+      },
+      error:(err)=>{
+        console.log("error while fetching all products",err);
+      }
+    }) 
+    
+    
+  }
 
   // ----------------binding demo starts here
   // string interpolation
@@ -80,11 +152,69 @@ export class FormsInterviewComponent {
   accessChildCompValue() {
     // this.childComp.calculateAge();
     console.log("childcomp age value",this.childComp.ageValue.nativeElement.value);
-    console.log("age value from direct varibale",this.childComp.calculatedAge);
-    
-    
-    
+    console.log("age value from direct varibale",this.childComp.calculatedAge); 
   }
 
+  // observable code changes
+  // creating observables using rxjs operators of, from and fromevent
+  // of operator we can pass any number of arguments to of operator 
+  observableofList = of("ashish",true,123456);
+
+  // from operator 
+  // we can pass only 1 argument to the from operator which should be either an array or a string
+  // it will emit the datas one by one at a time ie each elements of the array at a time if it is an array
+  observablefromList = from(["ashish","amal","ashwin"]);
+
+  // fromEvent operator
+  observableFromEventList: any;
+  @ViewChild('fromEventBtn') fromEventBtn: ElementRef;
+  fromEvent() {
+    this.observableFromEventList = fromEvent(this.fromEventBtn.nativeElement,'click')
+    
+    this.observableFromEventList.subscribe((data)=>{
+      console.log("data coming from fromevent",data);
+      
+    })
+  }
+
+  // normal creation of observables
+  observableListClass = new Observable((observer)=>{
+    observer.next([12,13,14,15]);
+  });
+
+  ngAfterViewInit() {
+    this.fromEvent();
+  }
+
+  //promises and observables difference
+  promise = new Promise((resolve,reject)=>{
+    console.log("Inside Promise at the time of creation itself");
+    resolve(100);
+
+    // emits only a single value the previous value that is 100
+    resolve(200);
+
+    reject("Promise value is rejected");
+    
+  }) 
+
+  observable = new Observable((observer)=>{
+    console.log("inside observable only after subscription");
+    
+    observer.next(12);
+
+    // emits multiple values
+    observer.next(13);
+
+    observer.error("Observer value failed");
+  })
+
+  // rxjs operators practice
+  // map, filter, debouncetime, switchMap, mergeMap, concatMap, exhaustMap, take, takeUntil, forkJoin,
+  // catchError, share, pipe, tap, interval, first, last, throttleTime, distinctUntilChanged
+  // retry
+
+  
+  
 
 }
