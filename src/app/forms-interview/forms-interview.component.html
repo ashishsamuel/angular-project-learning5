@@ -204,5 +204,49 @@
         <p>{{product.productPrice}}</p>
     </div>
     </ng-container>
-    
+
+    <h4>first 3 products</h4>
+    <button (click)="fetchFirst3Products()">fetch first 3 products</button>
+    <div *ngFor="let product of first3Products" class="d-flex">
+        <p>{{product.title}}</p>
+        <p>{{product.price}}</p>
+    </div>
+
+    <div>
+        <button (click)="duplicateEmissionObservableFunctionComp()">Prevent Duplicate emission</button>
+    </div>
+
+    <div>
+        <input type="text" #searchText (change)="fetchSearchText(searchText.value)">
+    </div>
+
+    <div>
+        <button (click)="mergeMapFunctionCall()">merge map function call</button>
+    </div>
+
+    <div>
+        <button (click)="concatMapProductDetailsFunction()">concat map function call</button>
+    </div>
+
+    <div>
+        <button (click)="exhaustMapFunctionCall()">exhaust map function call</button>
+    </div>
+</div>
+
+
+<!-- subjects in angular -->
+
+<div class="d-flex">
+    <button (click)="passValueSubject()">Pass Value to Subject</button>
+    <button (click)="fetchSubjectValue()">Fetch Value from Subject</button>
+</div>
+
+<div>
+    <button (click)="emitDataBehaviorSubject()">Pass Value to behaviourSubject</button>
+    <button (click)="getDataBehaviorSubject()">Fetch Value from behaviourSubject</button>
+</div>
+
+<div>
+    <button (click)="emitDataReplaySubject()">Pass Value to replaySubject</button>
+    <button (click)="getDataReplaySubject()">Fetch Value from replaySubject</button>
 </div>
