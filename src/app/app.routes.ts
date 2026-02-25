@@ -11,9 +11,13 @@ import { SignalsDemoComponent } from './signals-demo/signals-demo.component';
 import { SignalsComponent } from './signals/signals.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { FormsInterviewComponent } from './forms-interview/forms-interview.component';
+import { FournotfourComponent } from './fournotfour/fournotfour.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  // for redirect route it will change the route path from localhost:4200/ to localhost:4200/home
+  { path: '', redirectTo: 'home', pathMatch:'full'},
+  // for the below route it wont change the route path from localhost:4200/ but it will load the homecomponent if we dont give any path also pathmatch not needed for default route and this is the default route
+  // {path: '' , component: HomeComponent},
   { path: 'home', component: HomeComponent },
   { path: 'user', component: UserComponent },
   { path: 'forms-demo', component: FormsDemoComponent},
@@ -26,5 +30,7 @@ export const routes: Routes = [
   { path: 'signals-first', component: SignalsComponent},
   { path: 'rxjs-operator-demo', component: RxjsOperatorDemoComponent},
   { path: 'subjects', component: SubjectsComponent},
-  { path: 'angular-forms-interview', component: FormsInterviewComponent}
+  { path: 'angular-forms-interview', component: FormsInterviewComponent},
+  // wild route
+  { path: '**', component: FournotfourComponent}
 ];
