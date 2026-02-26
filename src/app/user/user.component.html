@@ -17,6 +17,12 @@
         <td>{{ user.mobileno }}</td>
         <td>{{ user.emailid }}</td>
         <td>
+          <button class="edit-btn" (click)="onEditClick(user)" title="edit">
+            Edit
+          </button>
+          <button [routerLink]="['/user']" [queryParams]="{name:'Ashish Samuel',active:true}">static queryparammap naviagtation</button>
+        </td>
+        <td>
           <button class="delete-btn" (click)="onDeleteClick(user)" title="Delete">
             🗑️
           </button>

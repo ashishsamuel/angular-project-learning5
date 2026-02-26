@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from
 import { CommonModule } from '@angular/common';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { ViewContainerDirective } from '../view-container.directive';
+import { Router, RouterLink } from '@angular/router';
 
 interface User {
   no: number;
@@ -13,7 +14,7 @@ interface User {
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective],
+  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective, RouterLink],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -49,7 +50,8 @@ export class UserComponent {
   userToDelete: User;
   @ViewChild(ViewContainerDirective)container:ViewContainerDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+    private router: Router
   ) {
 
   }
@@ -103,6 +105,19 @@ export class UserComponent {
       this.showConfirmDeleteComponent = false;
       containerViewRef.clear();
     }
+  }
+
+  onEditClick(user: User) {
+    // this.router.navigate([`/user/${user.no}`])
+    // better approach than above one pass userno separately as route paramater
+    // for passing dynamic values to the queryparam and all we can define it in ts file
+    this.router.navigate(['/user',user.no],{
+      queryParams:{
+        name:user.name,
+        emailid:user.emailid
+      }
+    });
+
   }
 
 }
