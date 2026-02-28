@@ -15,6 +15,7 @@ import { FournotfourComponent } from './fournotfour/fournotfour.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { authGuard } from './auth.guard';
 import { childGuard } from './child.guard';
+import { unsaveGuard } from './unsave.guard';
 
 export const routes: Routes = [
   // for redirect route it will change the route path from localhost:4200/ to localhost:4200/home
@@ -63,7 +64,9 @@ export const routes: Routes = [
   { path: 'forms-demo', component: FormsDemoComponent},
   { path: 'template-driven-form', component: TemplateDrivenFormComponent},
   { path: 'reactive-form', component: ReactiveFormsDemoComponent},
-  { path: 'http-demo', component: FirebaseHttpDemoComponent},
+  { path: 'http-demo', component: FirebaseHttpDemoComponent,
+    canDeactivate:[unsaveGuard]
+  },
   { path: 'async-demo', component: ObservablePromiseDemoComponent},
   { path: 'rxjs-demo', component: RxjsOperatorDemoComponent},
   { path: 'signals-demo', component: SignalsDemoComponent},

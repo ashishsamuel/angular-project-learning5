@@ -12,10 +12,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class FirebaseHttpDemoComponent {
 
-  http:HttpClient = inject(HttpClient)
+  http:HttpClient = inject(HttpClient);
+  submitButtonClickFlag = false;
 
   submitUserData(userData: NgForm) {
     console.log("userdata",userData.value);
+    if(userData.value.place)
+      this.submitButtonClickFlag = true;
     this.http.post('https://httpclient-project-bd70e-default-rtdb.firebaseio.com/users.json',userData.value).subscribe((res)=>{
       // console.log("response for the new user call",res);
     })
