@@ -11,7 +11,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <input type="text" [(ngModel)]="searchText">
+      <tr *ngFor="let user of users | search:searchText">
         <td>{{ user.no }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.mobileno }}</td>

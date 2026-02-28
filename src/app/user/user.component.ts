@@ -1,10 +1,12 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { ViewContainerDirective } from '../view-container.directive';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { SearchPipe } from '../search.pipe';
+import { FormsModule } from '@angular/forms';
 
-interface User {
+export interface User {
   no: number;
   name: string;
   mobileno: string;
@@ -14,11 +16,11 @@ interface User {
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective, RouterLink, RouterOutlet],
+  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective, RouterLink, RouterOutlet,SearchPipe, FormsModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
-export class UserComponent {
+export class UserComponent{
   users: User[] = [
     {
       no: 1,
@@ -119,5 +121,7 @@ export class UserComponent {
     });
 
   }
+
+  searchText: string = '';
 
 }
