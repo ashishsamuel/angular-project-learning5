@@ -16,6 +16,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { authGuard } from './auth.guard';
 import { childGuard } from './child.guard';
 import { unsaveGuard } from './unsave.guard';
+import { FormsDemoInterviewComponent } from './forms-demo-interview/forms-demo-interview.component';
 
 export const routes: Routes = [
   // for redirect route it will change the route path from localhost:4200/ to localhost:4200/home
@@ -74,6 +75,7 @@ export const routes: Routes = [
   { path: 'rxjs-operator-demo', component: RxjsOperatorDemoComponent},
   { path: 'subjects', component: SubjectsComponent},
   { path: 'angular-forms-interview', component: FormsInterviewComponent},
+  { path : 'forms-interview', component: FormsDemoInterviewComponent},
   // wild route
   { path: '**', component: FournotfourComponent}
 ];

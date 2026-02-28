@@ -1,0 +1,234 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h4 class="text-center mb-4 text-primary fw-bold">
+            User Registration
+          </h4>
+
+          <form (ngSubmit)="fetchUserValue(userForm)" #userForm="ngForm">
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label fw-semibold"
+                >Username</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="uname"
+                id="username"
+                ngModel
+                required
+                #uname="ngModel"
+              />
+              <div class="mt-2" *ngIf="uname.touched && uname.invalid">
+                <small style="color: red" *ngIf="uname.errors['required']"
+                  >Username is Required</small
+                >
+              </div>
+            </div>
+
+            <!-- Place -->
+            <div class="mb-3">
+              <label for="place" class="form-label fw-semibold">Place</label>
+              <input
+                type="text"
+                class="form-control"
+                name="place"
+                id="place"
+                ngModel
+                required
+              />
+            </div>
+
+            <!-- Country -->
+            <div class="mb-3">
+              <label for="country" class="form-label fw-semibold"
+                >Country</label
+              >
+              <select class="form-select" name="country" id="country" ngModel>
+                <option value="">-- Select --</option>
+                <option value="india">India</option>
+                <option value="germany">Germany</option>
+                <option value="uk">UK</option>
+                <option value="america">America</option>
+              </select>
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold d-block">Gender</label>
+
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="male"
+                  name="gender"
+                  id="genderMale"
+                  ngModel
+                />
+                <label class="form-check-label" for="genderMale">Male</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="female"
+                  name="gender"
+                  id="genderFemale"
+                  ngModel
+                />
+                <label class="form-check-label" for="genderFemale"
+                  >Female</label
+                >
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="others"
+                  name="gender"
+                  id="genderOthers"
+                  ngModel
+                />
+                <label class="form-check-label" for="genderOthers"
+                  >Others</label
+                >
+              </div>
+            </div>
+
+            <!-- Hobbies -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold d-block">Hobbies</label>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="hobbies"
+                  value="Listening Music"
+                  id="hobbyMusic"
+                  (change)="onHobbyChange($event)"
+                />
+                <label class="form-check-label" for="hobbyMusic">
+                  Listening Music
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="hobbies"
+                  value="Playing Sports"
+                  id="hobbySports"
+                  (change)="onHobbyChange($event)"
+                />
+                <label class="form-check-label" for="hobbySports">
+                  Playing Sports
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="hobbies"
+                  value="Riding Bike"
+                  id="hobbyBike"
+                  (change)="onHobbyChange($event)"
+                />
+                <label class="form-check-label" for="hobbyBike">
+                  Riding Bike
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="hobbies"
+                  value="Gardening"
+                  id="hobbyGarden"
+                  (change)="onHobbyChange($event)"
+                />
+                <label class="form-check-label" for="hobbyGarden">
+                  Gardening
+                </label>
+              </div>
+            </div>
+
+            <div ngModelGroup="address" class="mb-3">
+              <label for="address" class="form-label fw-semibold"
+                >Address</label
+              >
+              <div class="mb-3">
+                <label for="apartment">Apartment</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="apartment"
+                  id="apartment"
+                  ngModel
+                  required
+                  #apartment="ngModel"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="pincode">PinCode</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="pincode"
+                  id="pincode"
+                  ngModel
+                  required
+                  #pincode="ngModel"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="apartment">Street</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="street"
+                  id="street"
+                  ngModel
+                  required
+                  #street="ngModel"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="district">District</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="district"
+                  id="district"
+                  ngModel
+                  required
+                  #district="ngModel"
+                />
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-primary fw-semibold"
+                [disabled]="userForm.invalid"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
