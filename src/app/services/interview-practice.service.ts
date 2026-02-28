@@ -156,4 +156,10 @@ getFirst3ProductsRetry() {
     fetchValueFromSubject() {
       return this.user$;
     }
+
+    // canactivate guard execution
+    isUserLoggedIn:boolean = true;
+
+    // canactivate child guard demo
+    isUserLoggedInChild = false;
 }

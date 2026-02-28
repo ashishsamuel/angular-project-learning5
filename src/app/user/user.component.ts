@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from
 import { CommonModule } from '@angular/common';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { ViewContainerDirective } from '../view-container.directive';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 interface User {
   no: number;
@@ -14,7 +14,7 @@ interface User {
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective, RouterLink],
+  imports: [CommonModule, ConfirmDeleteComponent, ViewContainerDirective, RouterLink, RouterOutlet],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

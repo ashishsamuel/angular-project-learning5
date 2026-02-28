@@ -13,6 +13,8 @@ import { SubjectsComponent } from './subjects/subjects.component';
 import { FormsInterviewComponent } from './forms-interview/forms-interview.component';
 import { FournotfourComponent } from './fournotfour/fournotfour.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { authGuard } from './auth.guard';
+import { childGuard } from './child.guard';
 
 export const routes: Routes = [
   // for redirect route it will change the route path from localhost:4200/ to localhost:4200/home
@@ -20,7 +22,21 @@ export const routes: Routes = [
   // for the below route it wont change the route path from localhost:4200/ but it will load the homecomponent if we dont give any path also pathmatch not needed for default route and this is the default route
   // {path: '' , component: HomeComponent},
   { path: 'home', component: HomeComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'user', 
+    component: UserComponent,
+    // children:[
+    //   {path:':id', component: UserDetailsComponent}
+    // ],
+    canActivate: [authGuard],
+    // canActivateChild:[childGuard]
+   },
+
+  //  if we want to render only the view of userdetails component alone then we have to define it as a separate route like below
+// { path: 'user/:id', 
+  //   component: UserDetailsComponent,
+  //   canActivate:[childGuard]
+  //  },
+
   // need to include like below if we want the view of the usercomponent also needs to be rendered
   // { path: 'user', 
   //   component:UserComponent,
@@ -29,10 +45,9 @@ export const routes: Routes = [
   //   ]
   //  },
 
-   { path: 'user', 
-    children:[
-      {path:':id', component: UserDetailsComponent}
-    ]
+   { path: 'user/:id', 
+    component:UserDetailsComponent,
+    canActivate: [authGuard]
    },
   //  query strings are the optional data that is passed to a component through the route
   // query strings come at the end of the route after a ?
