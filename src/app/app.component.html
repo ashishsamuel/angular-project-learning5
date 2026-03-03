@@ -11,7 +11,9 @@
       <a routerLink="/http-demo" class="nav-link">Http Demo</a>
       <a routerLink="/rxjs-operator-demo" class="nav-link">RxJS Demo</a>
       <a routerLink="/angular-forms-interview" class="nav-link">Angular Interview Demo</a>
-      <p class="nav-link">Cart {{cart | async}}</p>
+      <!-- <p class="nav-link">Cart {{cart | async}}</p> -->
+      <p class="nav-link">Cart {{productCart?.length}}</p>
+
       </div>
     </nav>
   </div>
