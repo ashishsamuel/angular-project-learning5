@@ -1,16 +1,16 @@
 import { createReducer, on } from "@ngrx/store";
-import { loadFruits } from "./fruits.action";
+import { loadFruits, loadFruitsSuccess } from "./fruits.action";
+import { AppState, ItemFruitState } from "./app.state";
 
-export const initialState = {
-    fruits: [],
-    vegetables: []
+export const initialState: ItemFruitState = {
+    fruits:[]
 };
 
 export const fruitsReducer = createReducer(
     initialState,
-    on(loadFruits,(state,fruitsList)=>{
+    on(loadFruitsSuccess,(state,{fruits})=>{
         return {...state,
-            fruits:[...state.fruits,fruitsList]
+            fruits:fruits
         }
     })
 )

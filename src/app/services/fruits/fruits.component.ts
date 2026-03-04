@@ -17,7 +17,7 @@ export class FruitsComponent implements OnInit{
 
   ngOnInit() {
     this.store.dispatch(loadFruits());
-    this.store.select('fruitsList').subscribe((res)=>{
+    this.store.select(fruitsListSelector).subscribe((res)=>{
       console.log("fruitslist",res);
     })
   }
