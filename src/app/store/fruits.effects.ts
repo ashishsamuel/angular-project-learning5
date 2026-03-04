@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { loadFruits, loadFruitsFailure, loadFruitsSuccess } from "./fruits.action";
 import { NgrxApiService } from "../services/ngrx-api.service";
-import { catchError, map, mergeMap, of } from "rxjs";
+import { catchError, delay, map, mergeMap, of } from "rxjs";
 
 @Injectable()
 export class FruitsEffects {
@@ -14,7 +14,7 @@ export class FruitsEffects {
     loadFruitsObs = createEffect(()=>
         this.actions.pipe(ofType(loadFruits),
         mergeMap(()=>
-        this.ngrxService.fetchFruits().pipe(map(fruitsList=>{
+        this.ngrxService.fetchFruits().pipe(delay(3000),map(fruitsList=>{
             console.log("fruitslist in fruits effect",fruitsList);
             
             return loadFruitsSuccess({fruits:fruitsList})}),

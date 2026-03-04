@@ -16,9 +16,10 @@ export class FruitsComponent implements OnInit{
   constructor(private store: Store<AppState>){}
 
   ngOnInit() {
-    this.store.dispatch(loadFruits());
     this.store.select(fruitsListSelector).subscribe((res)=>{
       console.log("fruitslist",res);
+      if(res.length==0 || !res)
+        this.store.dispatch(loadFruits());
     })
   }
 
