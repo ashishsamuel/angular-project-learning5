@@ -8,6 +8,12 @@ export const initialCartState:AppState = {
     cartCount:0,
     cartProductsList: {
         cart:[]
+    },
+    fruitsList: {
+        fruits:[]
+    },
+    vegetableList:{
+        vegetables:[]
     }
 };
 

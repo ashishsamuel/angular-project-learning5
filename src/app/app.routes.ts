@@ -18,6 +18,8 @@ import { childGuard } from './child.guard';
 import { unsaveGuard } from './unsave.guard';
 import { FormsDemoInterviewComponent } from './forms-demo-interview/forms-demo-interview.component';
 import { NgrxDemoComponent } from './ngrx-demo/ngrx-demo.component';
+import { FruitsComponent } from './services/fruits/fruits.component';
+import { VegetablesComponent } from './services/vegetables/vegetables.component';
 
 export const routes: Routes = [
   // for redirect route it will change the route path from localhost:4200/ to localhost:4200/home
@@ -78,6 +80,8 @@ export const routes: Routes = [
   { path: 'angular-forms-interview', component: FormsInterviewComponent},
   { path : 'forms-interview', component: FormsDemoInterviewComponent},
   {path: 'ngrx-demo', component: NgrxDemoComponent},
+  { path: 'fruits-ngrx', component: FruitsComponent},
+  { path: 'vegetables-ngrx', component: VegetablesComponent},
   // wild route
   { path: '**', component: FournotfourComponent}
 ];
