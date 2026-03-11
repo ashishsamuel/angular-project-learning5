@@ -1,0 +1,308 @@
+var array = [40,10,30,20];
+
+// push() method
+array.push(50);
+console.log("array after pushing element 50",array);
+// multiple elements can be pushed to the array at the same time
+array.push(60,70)
+console.log("array after pushing element 60 and 70 together",array);
+
+// pop method
+array.pop();
+console.log("array after removing the last element from the array",array)
+
+// unshift method
+// used to insert elements at the begining of an array
+array.unshift(100,120);
+console.log("array after inserting elements at the starting of array",array)
+
+// shift method
+// used to remove the first element from an array
+array.shift();
+console.log("array after removing the first element of an array",array)
+
+// sort method
+// used to sort the elements of an array
+// for sorting the number array we need to pass a compareFunction to the sort method
+array.sort(function(a,b){return a-b});
+console.log("array after sorting in acending order",array);
+
+array.sort(function(a,b){return b-a});
+console.log("array after sorting in descending order",array);
+
+// if it is an array of strings then the array will be sorted in the ascending order in alphabatical order
+
+array1 = ["hello","amal","zebra","hen"];
+array1.sort();
+console.log("sorted array of strings",array1)
+
+
+// reverse method
+// used to reverse the elements in an array
+array.reverse();
+console.log("array after reversing",array)
+
+// for finding the largest and the smallest element in an array we use Math.min() and Math.max()
+minElement = Math.min(...array);
+console.log("smallest element in the array is",minElement);
+
+maxElement = Math.max(...array);
+console.log("largest element in the array is",maxElement);
+
+// foreach 
+array.forEach((num)=>{
+    num+=10;
+    console.log("number values", num);
+})
+
+//filter
+const num = array.filter((num)=>{
+    return num>50
+});
+console.log("numbers",num);
+
+function filterFunction() {
+    return array.filter(num=>num>50);
+    // console.log("numbers",num);
+}
+
+const filterFunctionReturnArray = filterFunction();
+
+console.log("return value from filter function",filterFunctionReturnArray)
+
+// find method
+function findFunction() {
+    return array.find(num=> num>25);
+}
+
+const findFunctionReturnArray = findFunction();
+
+console.log("return value from filter function",findFunctionReturnArray)
+
+// map method
+function mapFunction() {
+    return array.map(num=>num+100)
+}
+
+const mapFunctionReturnArray = mapFunction();
+console.log("return value from map function",mapFunctionReturnArray)
+
+// reduce method
+numArray = [105,15,2,64,33];
+// find highest number
+const highestValue = numArray.reduce((num1,num2)=>num1>num2?num1:num2);
+console.log("highest value in the array",highestValue);
+
+// find lowest number
+const lowestValue = numArray.reduce((num1,num2)=>num1<num2?num1:num2);
+console.log("lowest value",lowestValue);
+
+// sum of elements in array
+const sumValue = numArray.reduce((num1,num2)=>num1+num2);
+console.log("sum of elements in the array",sumValue);
+
+// difference between elements in the array
+const diffValue = numArray.reduce((num1,num2)=>num1-num2);
+console.log("difference value",diffValue);
+
+
+// reduceRight() method
+const result = numArray.reduceRight((num1,num2)=>num1-num2);
+console.log("resultant value of reduceright",result);
+
+// some() method
+const someResult = numArray.some((num)=>num>100);
+console.log("result value from some() method", someResult)
+
+let flatArray = [10,[50,56,[45,89]],5,15];
+const flatResult = flatArray.flat(2);
+console.log("flat Result",flatResult);
+console.log("flat array",flatArray)
+
+// includes
+let names = ["sanju","ashish","aswin","amal","amal"];
+const resultIncludesMethod = names.includes("aswin",3);
+console.log("resultIncludesMethod",resultIncludesMethod)
+
+//indexOf() method
+const resultIndexof = names.indexOf("amal");
+console.log("index of amal",resultIndexof);
+
+//lastIndexof() method
+let namesArray = ["sanju","ashish","aswin","amal","sanju"];
+const resultLastIndexof = namesArray.lastIndexOf("sanju");
+console.log("index of sanju",resultLastIndexof);
+
+//length
+console.log("length of the names array",namesArray.length);
+namesArray.length =3;
+console.log("names array after updation of length",namesArray);
+
+// splice() method
+let fruits = ["apple","orange","pappaya"];
+
+// addition of fruits
+const spliceAddResult = fruits.splice(1,0,"mango","grapes");
+console.log("fruits array after adding mango and grapes", fruits);
+
+// removal of fruits
+const spliceRemoveResult = fruits.splice();
+console.log("result after removing 2 fruits from the fruits array",spliceRemoveResult);
+console.log("fruits original array after removal",fruits)
+
+// slice method
+const sliceMethodResult = fruits.slice(2,4);
+console.log("result after slice method",sliceMethodResult);
+
+// join method 
+const joinMethodResult = fruits.join(" and ");
+console.log("join method result",joinMethodResult);
+
+// array.from()
+const stringToArray = "ashish samuel thomson";
+const arrayFromString = Array.from(stringToArray);
+console.log("array created from string",arrayFromString);
+
+// at method
+const fruitValue = fruits.at(2);
+console.log("fruitvalue",fruitValue);
+
+// concat() method
+const concatResult = fruits.concat(array1);
+console.log("concat method result", concatResult);
+
+// copyWithin() method
+const copywithinResult = fruits.copyWithin(1,0,2);
+console.log("copywithin result",copywithinResult);
+
+// entries() method 
+const arrayEntries = fruits.entries();
+console.log("array entries",arrayEntries);
+arrayEntries.forEach((value)=>{
+    console.log("value",value);
+})
+
+// findIndex() method
+const indexValue = fruits.findIndex((fruit)=>{
+    return fruit.includes("ple")
+});
+console.log("index value of apple",indexValue);
+
+// isarray method
+const fruitsArrayCheck = Array.isArray(fruits);
+console.log("fruits array check",fruitsArrayCheck);
+
+//keys() method
+fruits.keys().forEach((fruit)=>{
+    console.log("keys of the fruit array",fruit);
+})
+
+//reverse() method
+console.log("fruits reversing",fruits.reverse());
+console.log("after reversing orginal array",fruits);
+
+// valueOf() method
+console.log("valueOf(fruits) = ",fruits.valueOf());
+
+
+output 
+
+array after pushing element 50 [ 40, 10, 30, 20, 50 ]
+array after pushing element 60 and 70 together [
+  40, 10, 30, 20,
+  50, 60, 70
+]
+array after removing the last element from the array [ 40, 10, 30, 20, 50, 60 ]
+array after inserting elements at the starting of array [
+  100, 120, 40, 10,
+   30,  20, 50, 60
+]
+array after removing the first element of an array [
+  120, 40, 10, 30,
+   20, 50, 60
+]
+array after sorting in acending order [
+  10, 20,  30, 40,
+  50, 60, 120
+]
+array after sorting in descending order [
+  120, 60, 50, 40,
+   30, 20, 10
+]
+sorted array of strings [ 'amal', 'hello', 'hen', 'zebra' ]
+array after reversing [
+  10, 20,  30, 40,
+  50, 60, 120
+]
+smallest element in the array is 10
+largest element in the array is 120
+number values 20
+number values 30
+number values 40
+number values 50
+number values 60
+number values 70
+number values 130
+numbers [ 60, 120 ]
+return value from filter function [ 60, 120 ]
+return value from filter function 30
+return value from map function [
+  110, 120, 130,
+  140, 150, 160,
+  220
+]
+highest value in the array 105
+lowest value 2
+sum of elements in the array 219
+difference value -9
+resultant value of reduceright -153
+result value from some() method true
+flat Result [
+  10, 50, 56, 45,
+  89,  5, 15
+]
+flat array [ 10, [ 50, 56, [ 45, 89 ] ], 5, 15 ]
+resultIncludesMethod false
+index of amal 3
+index of sanju 4
+length of the names array 5
+names array after updation of length [ 'sanju', 'ashish', 'aswin' ]
+fruits array after adding mango and grapes [ 'apple', 'mango', 'grapes', 'orange', 'pappaya' ]
+result after removing 2 fruits from the fruits array []
+fruits original array after removal [ 'apple', 'mango', 'grapes', 'orange', 'pappaya' ]
+result after slice method [ 'grapes', 'orange' ]
+join method result apple and mango and grapes and orange and pappaya
+array created from string [
+  'a', 's', 'h', 'i', 's',
+  'h', ' ', 's', 'a', 'm',
+  'u', 'e', 'l', ' ', 't',
+  'h', 'o', 'm', 's', 'o',
+  'n'
+]
+fruitvalue grapes
+concat method result [
+  'apple',   'mango',
+  'grapes',  'orange',
+  'pappaya', 'amal',
+  'hello',   'hen',
+  'zebra'
+]
+copywithin result [ 'apple', 'apple', 'mango', 'orange', 'pappaya' ]
+array entries Object [Array Iterator] {}
+value [ 0, 'apple' ]
+value [ 1, 'apple' ]
+value [ 2, 'mango' ]
+value [ 3, 'orange' ]
+value [ 4, 'pappaya' ]
+index value of apple 0
+fruits array check true
+keys of the fruit array 0
+keys of the fruit array 1
+keys of the fruit array 2
+keys of the fruit array 3
+keys of the fruit array 4
+fruits reversing [ 'pappaya', 'orange', 'mango', 'apple', 'apple' ]
+after reversing orginal array [ 'pappaya', 'orange', 'mango', 'apple', 'apple' ]
+valueOf(fruits) =  [ 'pappaya', 'orange', 'mango', 'apple', 'apple' ]
+
+=== Code Execution Successful ===
